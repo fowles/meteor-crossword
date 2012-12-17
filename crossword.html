@@ -1,17 +1,18 @@
 <head>
-  <title>scratch</title>
+  <title>Crossword</title>
 </head>
 
 <body>
-  {{> controls}}
-  {{> board}}
+  <div>{{> controls}}</div>
+  <div>{{> board}}</div>
 </body>
 
+
 <template name='controls'>
-  <div class='lists' style='float:right;'>
-    <select size='3'>
+  <div class='controls' >
+    <select size='10' width='100%'>
       {{#each boards}}
-        <option class='board'>{{this._id}}</option>
+        <option class='board'>{{name}}</option>
       {{/each}}
     </select>
   </div>
@@ -20,6 +21,9 @@
 <template name='board'>
   {{#with b}}
     <div class='board'>
+      <input type='text'   id='name'   value='{{name}}' >
+      <input type='number' id='width'  min='0' value='{{width}}' >
+      <input type='number' id='height' min='0' value='{{height}}' >
       {{#each elems}}
         <div class='row'>
           {{#each this}}
@@ -29,7 +33,7 @@
       {{/each}}
       <div class='row'/>
     </div>
-{{/with}}
+  {{/with}}
 </template>
 
 <template name='cell'>
