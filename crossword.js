@@ -13,17 +13,6 @@ function Board(w, h) {
     }
     this.elems.push(r)
   }
-
-  this.toString = function() {
-    var r = ""
-    this.elems.forEach( function(row) {
-      row.forEach( function(e) {
-        r += e.value + " "
-      })
-      r += "\n"
-    })
-    return r
-  }
 }
 
 
