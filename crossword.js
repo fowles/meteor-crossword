@@ -47,6 +47,7 @@ if (Meteor.isClient) {
       return true
     },
     'click .board': function (evt) {
+      Boards.update(this._id, this)
       Session.set("active-board", this)
       return true
     }
