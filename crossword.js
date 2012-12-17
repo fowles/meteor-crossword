@@ -2,6 +2,9 @@ function Element(val) {
     this.value = val;
 }
 
+Boards = new Meteor.Collection("boards")
+Boards.remove({})
+
 function Board(w, h) {
   this.elems = []
   for(var i = 0; i < w; ++i) {
@@ -11,10 +14,26 @@ function Board(w, h) {
     }
     this.elems.push(r)
   }
+
+  this.update = function() {
+    Boards.update(this._id, this)
+  }
+
+  this.toString = function() {
+    var r = ""
+    this.elems.forEach( function(row) {
+      row.forEach( function(e) {
+        r += e.value + " "
+      })
+      r += "\n"
+    })
+    return r
+  }
 }
 
-Boards = new Meteor.Collection("boards")
-Boards.insert(new Board(3,3))
+if (Boards.find().count() == 0) {
+  Boards.insert(new Board(3,3))
+}
 
 if (Meteor.isClient) {
   Template.board.elems = function() {
