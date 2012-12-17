@@ -1,5 +1,4 @@
 Boards = new Meteor.Collection("boards")
-Boards.remove({})
 
 function Element(val, board) {
     this.value = val;
@@ -15,10 +14,6 @@ function Board(w, h) {
     this.elems.push(r)
   }
 
-  this.update = function() {
-    Boards.update(this._id, this)
-  }
-
   this.toString = function() {
     var r = ""
     this.elems.forEach( function(row) {
@@ -31,12 +26,9 @@ function Board(w, h) {
   }
 }
 
-if (Boards.find().count() == 0) {
-  Boards.insert(new Board(3,3))
-}
 
 if (Meteor.isClient) {
-  Template.board.board = function() {
+  Template.board.b = function() {
     return Boards.findOne();
   }
 
@@ -46,7 +38,7 @@ if (Meteor.isClient) {
       return true;
     },
     'click .board': function (evt) {
-      this.update()
+      Boards.update(this._id, this)
       return true;
     }
   });
@@ -54,6 +46,8 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
+    if( Boards.find().count() == 0 ) {
+      Boards.insert(new Board(3,3))
+    }
   });
 }
