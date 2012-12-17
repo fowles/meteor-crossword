@@ -7,20 +7,23 @@
 </body>
 
 <template name='board'>
-  <div id='elems'>
-    {{#each elems}}
-      <div id='board_row'>
-        {{#each this}}
-          <div id='board_elm'>
+  {{#with board}}
+    <div class='board'>
+      {{#each elems}}
+        <div class='row'>
+          {{#each this}}
             {{> cell }}
-          </div>
-        {{/each}}
-      </div>
-    {{/each}}
-  </div>
+          {{/each}}
+        </div>
+      {{/each}}
+      <div class='row'/>
+    </div>
+{{/with}}
 </template>
 
 <template name='cell'>
-  {{ value }}
+  <div class='cell' >
+    {{ value }}
+  </div>
 </template>
 

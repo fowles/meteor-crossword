@@ -1,9 +1,9 @@
-function Element(val) {
-    this.value = val;
-}
-
 Boards = new Meteor.Collection("boards")
 Boards.remove({})
+
+function Element(val, board) {
+    this.value = val;
+}
 
 function Board(w, h) {
   this.elems = []
@@ -36,9 +36,20 @@ if (Boards.find().count() == 0) {
 }
 
 if (Meteor.isClient) {
-  Template.board.elems = function() {
-    return Boards.findOne().elems;
+  Template.board.board = function() {
+    return Boards.findOne();
   }
+
+  Template.board.events({
+    'click .cell': function (evt) {
+      this.value += 1
+      return true;
+    },
+    'click .board': function (evt) {
+      this.update()
+      return true;
+    }
+  });
 }
 
 if (Meteor.isServer) {
