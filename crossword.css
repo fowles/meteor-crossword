@@ -1,11 +1,6 @@
 /* CSS declarations go here */
-div .board {
-    clear:left;
-}
-
-div .row {
-    clear:left;
-}
+div .board { float:left; }
+div .row { clear:left; }
 div .cell {
     width:84px;
     height:84px;
@@ -18,3 +13,5 @@ div .cell {
     background-color:#eeeee8;
     font-size: 65px;
 }
+
+div .controls { float:right; }

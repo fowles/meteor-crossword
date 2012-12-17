@@ -3,8 +3,19 @@
 </head>
 
 <body>
+  {{> controls}}
   {{> board}}
 </body>
+
+<template name='controls'>
+  <div class='lists' style='float:right;'>
+    <select size='3'>
+      {{#each boards}}
+        <option class='board'>{{this._id}}</option>
+      {{/each}}
+    </select>
+  </div>
+</template>
 
 <template name='board'>
   {{#with b}}
