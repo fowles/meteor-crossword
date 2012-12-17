@@ -12,11 +12,15 @@
       <div id='board_row'>
         {{#each this}}
           <div id='board_elm'>
-            {{ value }}
+            {{> cell }}
           </div>
         {{/each}}
       </div>
     {{/each}}
   </div>
+</template>
+
+<template name='cell'>
+  {{ value }}
 </template>
 
