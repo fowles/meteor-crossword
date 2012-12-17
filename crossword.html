@@ -1,40 +1,22 @@
 <head>
-  <title>crossword</title>
+  <title>scratch</title>
 </head>
 
 <body>
-<div id="wrapper">
-	<div id="header">
-		<span>Sample</span>
-		<button id="revealButton" class="button">Reveal</button>
-		<button id="hideButton" class="button">Hide</button>
-		<button id="saveButton" class="button">Save</button>
-		<button id="loadButton" class="button">Load</button>
-		<hr/>
-		<p style="font-size:11pt">Puzzle borrowed from the Washington Post, January 31, 2012.
-		Use arrow keys or mouse to navigate.</p>
-	</div>
-	<div id="left">
-		<div id="puzzleContainer">
-		<table id="puzzleTable" class="cwTable">
-		  <tr class="cwRow">
-		    <td class="cwCell"><div class="cwNumber">12</div>A</td>
-		    <td class="cwCell">B</td>
-		  </tr>    
-		  <tr class="cwRow">
-		    <td class="cwCell">C</td>
-		    <td class="cwCell">D</td>
-		  </tr>
-		</table>   
-		</div>
-	</div>
-	<div id="right">
-		<div id="acrossContainer">
-		ACROSS
-		</div>
-		<div id="downContainer" >
-		DOWN
-		</div>
-	</div>
-</div>
+  {{> board}}
 </body>
+
+<template name='board'>
+  <div id='elems'>
+    {{#each elems}}
+      <div id='board_row'>
+        {{#each this}}
+          <div id='board_elm'>
+            {{ value }}
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+</template>
+
