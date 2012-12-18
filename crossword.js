@@ -32,7 +32,7 @@ if (Meteor.isClient) {
 
   var updateBoard = function (b) {
     Boards.update(b._id, b)
-    Session.set("active-board", b)
+    Session.set("active-board-id", b._id)
   }
 
   Template.controls.boards = function() {
@@ -46,7 +46,8 @@ if (Meteor.isClient) {
   })
 
   Template.board.b = function() {
-    return Session.get("active-board") || Boards.findOne()
+    var b = Boards.findOne(Session.get('active-board-id'))
+    return b || Boards.findOne()
   }
 
   Template.board.events({
