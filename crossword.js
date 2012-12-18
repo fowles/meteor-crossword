@@ -46,8 +46,7 @@ if (Meteor.isClient) {
   })
 
   Template.board.b = function() {
-    var b = Boards.find(Session.get('active-board-id')).fetch()[0]
-    //var b = Boards.findOne(Session.get('active-board-id'))
+    var b = Boards.findOne(Session.get('active-board-id'))
     return b || Boards.findOne()
   }
 
