@@ -7,11 +7,11 @@ function Element(val, board) {
 function setBoardDimensions(b, w, h) {
   var old = b.elems || []
   b.elems = []
-  b.width = w
-  b.height = h
-  for(var i = 0; i < w; ++i) {
+  b.width = parseInt(w)
+  b.height = parseInt(h)
+  for(var i = 0; i < b.width; ++i) {
     var r = []
-    for(var j = 0; j < h; ++j) {
+    for(var j = 0; j < b.height; ++j) {
       r.push((old[i] || [])[j] || new Element(i*j))
     }
     b.elems.push(r)
@@ -21,7 +21,6 @@ function setBoardDimensions(b, w, h) {
 
 function Board(w, h) {
   this.name = undefined
-  this.foo = 12
   setBoardDimensions(this, w, h)
 }
 
