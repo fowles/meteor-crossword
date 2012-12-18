@@ -46,7 +46,8 @@ if (Meteor.isClient) {
   })
 
   Template.board.b = function() {
-    var b = Boards.findOne(Session.get('active-board-id'))
+    var b = Boards.find(Session.get('active-board-id')).fetch()[0]
+    //var b = Boards.findOne(Session.get('active-board-id'))
     return b || Boards.findOne()
   }
 
@@ -76,6 +77,7 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     if( Boards.find().count() == 0 ) {
       Boards.insert(new Board(3,3))
+      Boards.insert(new Board(4,3))
     }
   });
 }
