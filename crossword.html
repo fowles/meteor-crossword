@@ -3,8 +3,10 @@
 </head>
 
 <body>
-  <div>{{> controls}}</div>
-  <div>{{> board}}</div>
+  <div name='parent'>
+    <div>{{> controls}}</div>
+    <div>{{> board}}</div>
+  </div>
 </body>
 
 
@@ -24,21 +26,24 @@
       <input type='text'   id='name'   value='{{name}}' >
       <input type='number' id='width'  min='0' value='{{width}}' >
       <input type='number' id='height' min='0' value='{{height}}' >
-      {{#each elems}}
-        <div class='row'>
-          {{#each this}}
-            {{> cell }}
-          {{/each}}
-        </div>
-      {{/each}}
-      <div class='row'/>
+      <table class='grid' >
+        {{#each elems}}
+          <tr>
+            {{#each this}}
+              <td class='cell'>
+                <div class='cell-listener'>
+                  {{> cell }}
+                </div>
+              </td>
+            {{/each}}
+          </tr>
+        {{/each}}
+      </table>
     </div>
   {{/with}}
 </template>
 
 <template name='cell'>
-  <div class='cell' >
-    {{ value }}
-  </div>
+  {{ value }}
 </template>
 

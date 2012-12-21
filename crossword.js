@@ -9,10 +9,10 @@ function setBoardDimensions(b, w, h) {
   b.elems = []
   b.width = parseInt(w)
   b.height = parseInt(h)
-  for(var i = 0; i < b.width; ++i) {
+  for(var j = 0; j < b.height; ++j) {
     var r = []
-    for(var j = 0; j < b.height; ++j) {
-      r.push((old[i] || [])[j] || new Element(i*j))
+    for(var i = 0; i < b.width; ++i) {
+      r.push((old[i] || [])[j] || new Element(i*j%10))
     }
     b.elems.push(r)
   }
@@ -35,6 +35,11 @@ if (Meteor.isClient) {
     Session.set("active-board-id", b._id)
   }
 
+  var activeBoard = function() {
+    var b = Boards.findOne(Session.get('active-board-id'))
+    return b || Boards.findOne()
+  }
+
   Template.controls.boards = function() {
     return Boards.find()
   }
@@ -45,13 +50,20 @@ if (Meteor.isClient) {
     }
   })
 
+  Template.board.rendered = function() {
+    var b = activeBoard()
+    if (!b) return
+    var w = $('.grid').width()/b.width
+    if (w > 40) w = 40
+    $('.cell').css({ fontSize: w })
+  }
+
   Template.board.b = function() {
-    var b = Boards.findOne(Session.get('active-board-id'))
-    return b || Boards.findOne()
+    return activeBoard()
   }
 
   Template.board.events({
-    'click .cell': function (evt) {
+    'click .cell-listener': function (evt) {
       this.value += 1
     },
     'click .board': function (evt) {
