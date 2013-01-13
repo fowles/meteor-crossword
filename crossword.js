@@ -1,7 +1,9 @@
 Boards = new Meteor.Collection("boards")
 
-function Element(val, board) {
-  this.value = val;
+function Element(i, j, val) {
+  this.i = i
+  this.j = j
+  this.value = val
 }
 
 function setBoardDimensions(b, w, h) {
@@ -12,7 +14,7 @@ function setBoardDimensions(b, w, h) {
   for(var j = 0; j < b.height; ++j) {
     var r = []
     for(var i = 0; i < b.width; ++i) {
-      r.push((old[i] || [])[j] || new Element(i*j%10))
+      r.push((old[i] || [])[j] || new Element(i, j, i*j%10))
     }
     b.elems.push(r)
   }
@@ -63,10 +65,9 @@ if (Meteor.isClient) {
   }
 
   Template.board.events({
-    'click .cell-listener': function (evt) {
-      this.value += 1
-    },
     'click .board': function (evt) {
+      cl = evt.toElement.classList
+      this.elems[cl[1]][cl[2]].value += 1
       updateBoard(this)
     },
     'keyup #name': function(evt) {
@@ -80,7 +81,7 @@ if (Meteor.isClient) {
     'change #height': function(evt) {
       setBoardDimensions(this, this.width, evt.target.value)
       updateBoard(this)
-    }
+    },
   })
 }
 

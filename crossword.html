@@ -31,9 +31,7 @@
           <tr>
             {{#each this}}
               <td class='cell'>
-                <div class='cell-listener'>
-                  {{> cell }}
-                </div>
+                {{> cell }}
               </td>
             {{/each}}
           </tr>
@@ -44,6 +42,8 @@
 </template>
 
 <template name='cell'>
-  {{ value }}
+  <div class='cell-listener {{ j }} {{ i }}'>
+    {{ value }}
+  </div>
 </template>
 
