@@ -42,8 +42,10 @@
 </template>
 
 <template name='cell'>
-  <div class='cell-listener {{ j }} {{ i }}'>
-    {{ value }}
-  </div>
+ {{#with elem }}
+    <div class='cell-listener'>
+      {{ value }}
+    </div>
+  {{/with}}
 </template>
 
