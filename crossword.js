@@ -57,7 +57,7 @@ if (Meteor.isClient) {
   })
 
   Template.cell.elem = function() {
-    return Elements.findOne({_id:this})
+    return Elements.findOne(this.toString())
   }
 
   Template.board.rendered = function() {
